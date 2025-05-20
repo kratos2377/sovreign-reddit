@@ -1,0 +1,13 @@
+[package]
+name = "reddit"
+version = "0.1.0"
+edition = "2021"
+
+[dependencies]
+anyhow = "1.0.62"
+borsh = { version = "0.10.3", features = ["bytes"] }
+serde = { version = "1", features = ["derive"] , optional=true}
+serde_json = {version="1", optional=true}
+
+sov-modules-api = { git = "https://github.com/Sovereign-Labs/sovereign-sdk.git", branch = "stable",  features = ["macros"] }
+sov-state = { git = "https://github.com/Sovereign-Labs/sovereign-sdk.git", branch = "stable", default-features = false }

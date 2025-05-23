@@ -1,78 +1,48 @@
-use sov_modules_api::{Context, Module, ModuleInfo};
+use std::ops::Sub;
+
+use address::{PostAddress, SubAddress, UserAddress};
+use post::Post;
+use serde::{Deserialize, Serialize};
+use sov_modules_api::{Context, Module, ModuleInfo, StateMap};
+use subreddit::SubReddit;
+use user::User;
 
 pub mod call;
 pub mod genesis;
 pub mod query;
+pub mod user;
+pub mod address;
+pub mod utils;
+pub mod subreddit;
+pub mod post;
 
 
 #[cfg_attr(feature = "native", derive(sov_modules_api::ModuleCallJsonSchema))]
 #[derive(ModuleInfo, Clone)]
-pub struct User<C: Context> {
+pub struct Reddit<C: Context> {
     #[address]
-    user_id: C::Address,
+    address: C::Address,
 
     #[state]
-    username: sov_modules_api::StateValue<String>,
+    user_collections: StateMap<UserAddress<C>, User<C>>,
 
     #[state]
-    user_joined_subs: sov_modules_api::StateMap<C::Address , String>
+    sub_collections: StateMap<SubAddress<C>, SubReddit<C>>,
+
+    #[state]
+    post_collectoons: StateMap<PostAddress<C> , Post<C>>
 }
 
-#[cfg_attr(derive(sov_modules_api::ModuleCallJsonSchema))]
-#[derive(ModuleInfo, Clone)]
-pub struct SubReddit<C: Context> {
-
-    #[address]
-    sub_id: C::Address,
-
-    #[state]
-    subname: sov_modules_api::StateValue<String>
-}
+#[derive(Debug, Clone, Serialize, Deserialize, Eq, PartialEq)]
+pub struct RedditConfig {}
 
 
+impl<C:Context> Module for Reddit<C> {
+     type Context = C;
 
+    type Config = RedditConfig;
 
-#[cfg_attr(derive(sov_modules_api::ModuleCallJsonSchema))]
-#[derive(ModuleInfo, Clone)]
-pub struct Post<C: Context> {
+    type CallMessage = CallMessage<C>;
 
-    #[address]
-    post_id: C::Address,
-    #[address]
-    user_id: C::Address,
-    #[address]
-    sub_id: C::Address,
-
-    #[state]
-    content: sov_modules_api::StateValue<String>,
-
-    #[state]
-    status: sov_modules_api::StateValue<bool>
-
-}
-
-
-
-#[cfg_attr(derive(sov_modules_api::ModuleCallJsonSchema))]
-#[derive(ModuleInfo, Clone)]
-pub struct Comment<C: Context> {
-
-    #[address]
-    comment_id: C::Address,
-    #[address]
-    user_id: C::Address,
-    #[address]
-    sub_id: C::Address,
-
-    #[state]
-    content: sov_modules_api::StateValue<String>,
-
-    #[state]
-    status: sov_modules_api::StateValue<bool>
-
-}
-
-
-impl<C:Context> Module for User<C> {
-    
+    type Event = ();
 }

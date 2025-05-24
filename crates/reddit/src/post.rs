@@ -59,15 +59,17 @@ impl<C: Context> Post<C> {
         sub_address: SubAddress<C>,
     context: &C,
     working_set: &mut WorkingSet<C>
- ) -> anyhow::Result<Post<C>> {
+ ) -> anyhow::Result<(PostAddress<C> , Post<C>)> {
 
 
         let creator = context.sender();
 
     let post_address = get_post_address(creator.as_ref() ,
-     sub_address.as_ref() , title );
+     sub_address.as_ref() );
 
-    Ok(Post {
+    Ok(  
+
+        (post_address.clone() , Post {
         post_address,
         user_address: UserAddress::new(creator),
         subaddress: sub_address,
@@ -76,6 +78,8 @@ impl<C: Context> Post<C> {
         content: content.to_string(),
         status: PostStatus::ACTIVE.to_string(),
     })
+
+    )
     
 
 

@@ -30,7 +30,7 @@ impl<C: Context> SubReddit<C> {
     sub_collections: &StateMap<SubAddress<C> , SubReddit<C>>,
     context: &C,
     working_set: &mut WorkingSet<C>
- ) -> anyhow::Result<SubReddit<C>> {
+ ) -> anyhow::Result<(SubAddress<C> , SubReddit<C>)> {
 
          let creator = context.sender();
 
@@ -42,11 +42,14 @@ impl<C: Context> SubReddit<C> {
     if sub_add.is_some() {
         Err(anyhow!( "Subreddit with subname={} already exists", subname ))
     } else {
-        Ok(SubReddit {
+        Ok(  
+            (sub_address.clone() , SubReddit {
              subaddress: sub_address.clone(), 
             subname: subname.to_string(), 
             description: description.to_string(), 
-            mods: vec![UserAddress::new(creator)] } )
+            mods: vec![UserAddress::new(creator)] })
+
+         )
     }
 
 

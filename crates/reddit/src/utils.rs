@@ -1,6 +1,7 @@
 use std::time::{Duration, SystemTime, UNIX_EPOCH};
 
 use sov_modules_api::digest::Digest;
+use uuid::Uuid;
 
 use crate::address::{PostAddress, SubAddress, UserAddress};
 
@@ -35,13 +36,13 @@ pub fn get_sub_address<C: sov_modules_api::Context>(
 pub fn get_post_address<C: sov_modules_api::Context>(
     user_address: &[u8],
     sub_address: &[u8],
-    title: &str
 ) -> PostAddress<C> {
+    let new_uuid = Uuid::new_v4();
     let mut hasher = C::Hasher::new();
 
     hasher.update(user_address);
     hasher.update(sub_address);
-    hasher.update(title.as_bytes());
+    hasher.update(new_uuid.as_bytes());
 
     let hash: [u8; 32] = hasher.finalize().into();
     PostAddress::new(&C::Address::from(hash))

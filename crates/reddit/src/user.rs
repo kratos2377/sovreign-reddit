@@ -1,4 +1,4 @@
-use anyhow::{anyhow, bail, Ok};
+use anyhow::{anyhow, bail};
 use sov_modules_api::{Context, StateMap, WorkingSet};
 
 use crate::{address::{PostAddress, UserAddress}, utils::get_user_address};

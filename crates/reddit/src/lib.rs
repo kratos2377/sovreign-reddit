@@ -9,13 +9,13 @@ use subreddit::SubReddit;
 use user::User;
 
 pub mod call;
-pub mod genesis;
 pub mod query;
 pub mod user;
 pub mod address;
 pub mod utils;
 pub mod subreddit;
 pub mod post;
+pub mod offchain;
 
 
 #[cfg_attr(feature = "native", derive(sov_modules_api::ModuleCallJsonSchema))]

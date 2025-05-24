@@ -15,10 +15,12 @@ uuid = {version ="1.17.0" , features=["v4"]}
 sov-modules-api = { git = "https://github.com/Sovereign-Labs/sovereign-sdk.git", branch = "stable",  default-features = false  }
 sov-modules-macros = { git = "https://github.com/Sovereign-Labs/sovereign-sdk.git", branch = "stable", default-features = false }
 sov-state = { git = "https://github.com/Sovereign-Labs/sovereign-sdk.git", branch = "stable", default-features = false }
-
+reqwest = "0.12.15"
+tokio = { version = "1.42.0", features = ["full"], optional = true }
 
 [features]
 default = ["native"]
+offchain=["tokio"]
 serde = ["dep:serde", "dep:serde_json"]
 borsh = ["dep:borsh"]
-native = ["serde", "borsh", "sov-state/native", "sov-modules-api/native", "sov-modules-macros/native"]
+native = ["serde", "borsh", "sov-state/native", "sov-modules-api/native", "sov-modules-macros/native", "offchain"]

@@ -4,3 +4,25 @@ version = "0.1.0"
 edition = "2021"
 
 [dependencies]
+sov-rollup-interface = { git = "https://github.com/Sovereign-Labs/sovereign-sdk.git", branch = "nightly", default-features = false }
+sov-sequencer-registry = { git = "https://github.com/Sovereign-Labs/sovereign-sdk.git", branch = "nightly", default-features = false }
+sov-modules-api = { git = "https://github.com/Sovereign-Labs/sovereign-sdk.git", branch = "nightly" , features=["native"]}
+sov-modules-macros = { git = "https://github.com/Sovereign-Labs/sovereign-sdk.git", branch = "nightly" }
+sov-zk-cycle-utils = { git = "https://github.com/Sovereign-Labs/sovereign-sdk.git", branch = "nightly", default-features = false }
+sov-zk-cycle-macros = { git = "https://github.com/Sovereign-Labs/sovereign-sdk.git", branch = "nightly", default-features = false }
+sov-state = { git = "https://github.com/Sovereign-Labs/sovereign-sdk.git", branch = "nightly", default-features = false }
+sov-chain-state  = { git = "https://github.com/Sovereign-Labs/sovereign-sdk.git", branch = "nightly", default-features = false }
+sov-blob-storage = { git = "https://github.com/Sovereign-Labs/sovereign-sdk.git", branch = "nightly", default-features = false }
+sov-core = {path = "../sov-core"}
+anyhow = "1.0.98"
+thiserror = "2.0.12"
+borsh = "1.5.7"
+serde = "1.0.219"
+tracing = "0.1.41"
+jmt = "0.11.0"
+hex = "0.4.3"
+jsonrpsee = {version="0.25.1", features = ["macros", "client-core", "server"], optional = true }
+
+[features]
+default = []
+native = ["sov-state/native", "sov-modules-api/native", "jsonrpsee", "sov-chain-state/native", "sov-blob-storage/native"]

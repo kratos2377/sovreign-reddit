@@ -55,4 +55,29 @@ impl<C: Context> SubReddit<C> {
 
     }
 
+
+    #[allow(dead_code)]
+    pub fn get_sub_name(&self) -> &str {
+        &self.subname
+    }
+
+
+        #[allow(dead_code)]
+    pub fn get_sub_description(&self) -> &str {
+        &self.description
+    }
+
+
+        #[allow(dead_code)]
+    pub fn get_sub_address(&self) -> &SubAddress<C> {
+        &self.subaddress
+    }
+
+
+           #[allow(dead_code)]
+    pub fn get_mods(&self) -> &Vec<UserAddress<C>> {
+        &self.mods
+    }
+
+
 }

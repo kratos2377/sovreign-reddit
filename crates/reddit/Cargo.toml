@@ -7,14 +7,14 @@ edition = "2021"
 anyhow = "1.0.62"
 borsh = { version = "0.10.3", features = ["rc"], optional = true }
 clap = "4.5.38"
-jsonrpsee = "0.25.1"
+jsonrpsee = {version="0.25.1", features = ["macros", "client-core", "server"], optional = true }
 schemars = "0.8.22"
 serde = { version = "1", features = ["derive"] , optional=true}
 serde_json = {version="1" , optional=true}
 uuid = {version ="1.17.0" , features=["v4"]}
-sov-modules-api = { git = "https://github.com/Sovereign-Labs/sovereign-sdk.git", branch = "stable",  default-features = false  }
-sov-modules-macros = { git = "https://github.com/Sovereign-Labs/sovereign-sdk.git", branch = "stable", default-features = false }
-sov-state = { git = "https://github.com/Sovereign-Labs/sovereign-sdk.git", branch = "stable", default-features = false }
+sov-modules-api = { git = "https://github.com/Sovereign-Labs/sovereign-sdk.git", branch = "nightly",  default-features = false  }
+sov-modules-macros = { git = "https://github.com/Sovereign-Labs/sovereign-sdk.git", branch = "nightly", default-features = false }
+sov-state = { git = "https://github.com/Sovereign-Labs/sovereign-sdk.git", branch = "nightly", default-features = false }
 reqwest = "0.12.15"
 tokio = { version = "1.42.0", features = ["full"], optional = true }
 
@@ -23,4 +23,4 @@ default = ["native"]
 offchain=["tokio"]
 serde = ["dep:serde", "dep:serde_json"]
 borsh = ["dep:borsh"]
-native = ["serde", "borsh", "sov-state/native", "sov-modules-api/native", "sov-modules-macros/native", "offchain"]
+native = ["serde", "borsh", "sov-state/native", "sov-modules-api/native", "sov-modules-macros/native", "offchain" ,"jsonrpsee"]

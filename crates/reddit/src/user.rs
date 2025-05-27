@@ -42,4 +42,15 @@ impl<C: Context> User<C> {
 
 
  }
+
+ #[allow(dead_code)]
+ pub fn get_username(&self) -> &str {
+    &self.username
+ }
+
+#[allow(dead_code)]
+ pub fn get_karma(&self) -> u64 {
+    self.karma
+ }
+
 }

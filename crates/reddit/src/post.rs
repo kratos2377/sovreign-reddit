@@ -81,7 +81,46 @@ impl<C: Context> Post<C> {
 
     )
     
-
-
  }
+
+ #[allow(dead_code)]
+ pub fn get_post_address(&self) -> &PostAddress<C> {
+    &self.post_address
+ }
+
+
+  #[allow(dead_code)]
+ pub fn get_user_address(&self) -> &UserAddress<C> {
+    &self.user_address
+ }
+
+  #[allow(dead_code)]
+ pub fn get_sub_address(&self) -> &SubAddress<C> {
+    &self.subaddress
+ }
+ 
+ 
+  #[allow(dead_code)]
+ pub fn get_post_title(&self) -> &str {
+    &self.post_title
+ } 
+ 
+ 
+ #[allow(dead_code)]
+ pub fn get_post_flair(&self) -> &str {
+    &self.flair
+ } 
+ 
+ 
+ #[allow(dead_code)]
+ pub fn get_post_content(&self) -> &str {
+    &self.content
+ } 
+ 
+ #[allow(dead_code)]
+ pub fn get_post_status(&self) -> &str {
+    &self.status
+ }
+
+
 }

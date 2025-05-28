@@ -53,4 +53,10 @@ impl<C: Context> User<C> {
     self.karma
  }
 
+
+ #[allow(dead_code)]
+ pub fn get_user_address(&self) -> UserAddress<C> {
+    self.user_address.clone()
+ }
+
 }

@@ -32,16 +32,10 @@
 
 #![allow(unused_doc_comments)]
 #[cfg(feature = "native")]
-use sov_accounts::{AccountsRpcImpl, AccountsRpcServer};
-#[cfg(feature = "native")]
-use sov_bank::{BankRpcImpl, BankRpcServer};
-#[cfg(feature = "native")]
 use sov_blob_storage::{BlobStorageRpcImpl, BlobStorageRpcServer};
 #[cfg(feature = "native")]
 use sov_chain_state::{ChainStateRpcImpl, ChainStateRpcServer};
 #[cfg(feature = "native")]
-#[cfg(feature = "experimental")]
-use sov_evm::{EvmRpcImpl, EvmRpcServer};
 use sov_modules_api::capabilities::{BlobRefOrOwned, BlobSelector};
 #[cfg(feature = "native")]
 pub use sov_modules_api::default_context::DefaultContext;
@@ -49,16 +43,15 @@ use sov_modules_api::macros::DefaultRuntime;
 #[cfg(feature = "native")]
 use sov_modules_api::macros::{expose_rpc, CliWallet};
 use sov_modules_api::{Context, DispatchCall, Genesis, MessageCodec};
-#[cfg(feature = "native")]
-use sov_nft_module::{NonFungibleTokenRpcImpl, NonFungibleTokenRpcServer};
 use sov_rollup_interface::da::DaSpec;
 #[cfg(feature = "native")]
 use sov_sequencer_registry::{SequencerRegistryRpcImpl, SequencerRegistryRpcServer};
 #[cfg(feature = "native")]
 use sov_value_setter::{ValueSetterRpcImpl, ValueSetterRpcServer};
 
+#[cfg(feature = "native")]
+use reddit::query::{RedditRpcImpl, RedditRpcServer};
 
-/// The `demo-stf runtime`.
 #[cfg_attr(feature = "native", derive(CliWallet), expose_rpc)]
 #[derive(Genesis, DispatchCall, MessageCodec, DefaultRuntime)]
 #[serialization(borsh::BorshDeserialize, borsh::BorshSerialize)]
@@ -67,8 +60,6 @@ use sov_value_setter::{ValueSetterRpcImpl, ValueSetterRpcServer};
     serialization(serde::Serialize, serde::Deserialize)
 )]
 pub struct Runtime<C: Context, Da: DaSpec> {
-    /// The Bank module.
-    pub bank: sov_bank::Bank<C>,
     /// The Sequencer Registry module.
     pub sequencer_registry: sov_sequencer_registry::SequencerRegistry<C, Da>,
     #[cfg_attr(feature = "native", cli_skip)]
@@ -79,10 +70,8 @@ pub struct Runtime<C: Context, Da: DaSpec> {
     pub chain_state: sov_chain_state::ChainState<C, Da>,
     /// The Value Setter module.
     pub value_setter: sov_value_setter::ValueSetter<C>,
-    /// The Accounts module.
-    pub accounts: sov_accounts::Accounts<C>,
-    /// The NFT module.
-    pub nft: sov_nft_module::NonFungibleToken<C>,
+    // Reddit Module
+    pub reddit: reddit::Reddit<C>
 }
 
 impl<C, Da> sov_modules_stf_template::Runtime<C, Da> for Runtime<C, Da>

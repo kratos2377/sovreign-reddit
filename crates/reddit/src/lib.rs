@@ -16,22 +16,27 @@ pub mod utils;
 pub mod subreddit;
 pub mod post;
 pub mod offchain;
+pub mod hooks;
 
 
 #[cfg_attr(feature = "native", derive(sov_modules_api::ModuleCallJsonSchema))]
 #[derive(ModuleInfo, Clone)]
 pub struct Reddit<C: Context> {
     #[address]
-    address: C::Address,
+    pub address: C::Address,
+
+
+    // #[state]
+    // pub user_address_collections:  StateMap<C::Address , UserAddress<C>>,
 
     #[state]
-    user_collections: StateMap<UserAddress<C>, User<C>>,
+    pub user_collections: StateMap<UserAddress<C>, User<C>>,
 
     #[state]
-    sub_collections: StateMap<SubAddress<C>, SubReddit<C>>,
+    pub sub_collections: StateMap<SubAddress<C>, SubReddit<C>>,
 
     #[state]
-    post_collections: StateMap<PostAddress<C> , Post<C>>
+    pub post_collections: StateMap<PostAddress<C> , Post<C>>
 }
 
 #[derive(Debug, Clone, Serialize, Deserialize, Eq, PartialEq)]

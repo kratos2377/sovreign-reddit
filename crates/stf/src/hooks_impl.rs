@@ -21,7 +21,7 @@ impl<C: Context, Da: DaSpec> TxHooks for Runtime<C, Da> {
     ) -> anyhow::Result<<Self::Context as Spec>::Address> {
         // Before executing a transaction, retrieve the sender's address from the accounts module
         // and check the nonce
-        self.accounts.pre_dispatch_tx_hook(tx, working_set)
+        self.reddit.pre_dispatch_tx_hook(tx, working_set)
     }
 
     fn post_dispatch_tx_hook(
@@ -30,7 +30,7 @@ impl<C: Context, Da: DaSpec> TxHooks for Runtime<C, Da> {
         working_set: &mut WorkingSet<C>,
     ) -> anyhow::Result<()> {
         // After executing each transaction, update the nonce
-        self.accounts.post_dispatch_tx_hook(tx, working_set)
+        self.reddit.post_dispatch_tx_hook(tx, working_set)
     }
 }
 
@@ -107,8 +107,6 @@ impl<C: Context, Da: DaSpec> SlotHooks<Da> for Runtime<C, Da> {
         &self,
         #[allow(unused_variables)] working_set: &mut sov_modules_api::WorkingSet<C>,
     ) {
-        #[cfg(feature = "experimental")]
-        self.evm.end_slot_hook(working_set);
 
         self.chain_state.end_slot_hook(working_set);
     }
@@ -122,8 +120,7 @@ impl<C: Context, Da: sov_modules_api::DaSpec> FinalizeHook<Da> for Runtime<C, Da
         #[allow(unused_variables)] root_hash: &<<Self::Context as Spec>::Storage as Storage>::Root,
         #[allow(unused_variables)] accessory_working_set: &mut AccessoryWorkingSet<C>,
     ) {
-        #[cfg(feature = "experimental")]
-        self.evm.finalize_hook(root_hash, accessory_working_set);
+       
 
         self.chain_state
             .finalize_hook(root_hash, accessory_working_set);

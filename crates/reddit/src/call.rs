@@ -46,6 +46,8 @@ impl<C: Context> Reddit<C> {
     ) -> Result<CallResponse>{
         let (new_user_address , new_user) = User::new(username, &self.user_collections, context, working_set)?;
 
+        
+            //self.user_address_collections.set(context.sender(), &new_user_address, working_set);
         self.user_collections.set(&new_user_address, &new_user, working_set);
 
           Ok(CallResponse::default())

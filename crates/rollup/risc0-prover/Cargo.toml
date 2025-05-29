@@ -1,0 +1,15 @@
+[package]
+name = "risc0-prover"
+version = "0.1.0"
+edition = "2024"
+publish = false
+
+[build-dependencies]
+risc0-build = "0.18.0"
+
+
+[package.metadata.risc0-prover]
+methods = ["guest-celestia"]
+
+[features]
+bench = []

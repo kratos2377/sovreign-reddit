@@ -11,6 +11,15 @@ sov-zk-cycle-utils = { git = "https://github.com/Sovereign-Labs/sovereign-sdk.gi
 sov-zk-cycle-macros = { git = "https://github.com/Sovereign-Labs/sovereign-sdk.git", branch = "stable", default-features = false }
 sov-stf-runner = { git = "https://github.com/Sovereign-Labs/sovereign-sdk.git", branch = "stable", default-features = false }
 sov-modules-api = { git = "https://github.com/Sovereign-Labs/sovereign-sdk.git", branch = "stable", default-features = false }
+sov-state = { git = "https://github.com/Sovereign-Labs/sovereign-sdk.git", branch = "stable", default-features = false }
+sov-db = { git = "https://github.com/Sovereign-Labs/sovereign-sdk.git", branch = "stable", default-features = false }
+sov-modules-stf-template = { git = "https://github.com/Sovereign-Labs/sovereign-sdk.git", branch = "stable", default-features = false }
+
+sov-modules-rollup-template = { git = "https://github.com/Sovereign-Labs/sovereign-sdk.git", branch = "stable", default-features = false }
+
+sov-ledger-rpc= { git = "https://github.com/Sovereign-Labs/sovereign-sdk.git", branch = "stable", default-features = false }
+
+sov-sequencer= { git = "https://github.com/Sovereign-Labs/sovereign-sdk.git", branch = "stable", default-features = false }
 anyhow = "1.0.98"
 thiserror = "2.0.12"
 borsh = { version = "0.10.3", features = ["rc"], optional = true }
@@ -24,12 +33,16 @@ schemars = "0.8.22"
 serde = { version = "1", features = ["derive"] , optional=true}
 serde_json = {version="1" , optional=true}
 
-jsonrpsee = {version="0.25.1",features = ["http-client", "server"], optional = true }
+jsonrpsee = {version="0.20.2",features = ["http-client", "server"], optional = true }
 reddit = {path = "../reddit" }
 tokio = "1.45.1"
 
 stf = {path = "../stf"}
-
+risc0-adapter = {path = "../risc0-adapter"}
+celestia-adapter = {path = "../celestia-adapter"}
+rollup-config = {path = "../rollup-config"}
+async-trait = "0.1.88"
+risc0-prover = {path = "./risc0-prover"}
 
 [features]
 default = ["native"]

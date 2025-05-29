@@ -7,7 +7,7 @@ edition = "2021"
 anyhow = "1.0.62"
 borsh = { version = "0.10.3", features = ["rc"], optional = true }
 clap = "4.5.38"
-jsonrpsee = {version="0.25.1", features = ["macros", "client-core", "server"], optional = true }
+jsonrpsee = {version="0.20.2",features = ["http-client", "server"], optional = true }
 schemars = "0.8.22"
 serde = { version = "1", features = ["derive"] , optional=true}
 serde_json = {version="1" , optional=true}

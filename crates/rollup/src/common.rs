@@ -24,9 +24,6 @@ use sov_sequencer::batch_builder::FiFoStrictBatchBuilder;
 use sov_sequencer::get_sequencer_rpc;
 use sov_state::ProverStorage;
 
-#[cfg(feature = "experimental")]
-const TX_SIGNER_PRIV_KEY_PATH: &str = "../test-data/keys/tx_signer_private_key.json";
-
 pub(crate) fn create_rpc_methods<Da: DaService + Clone>(
     storage: &<DefaultContext as Spec>::Storage,
     ledger_db: &LedgerDB,
@@ -34,7 +31,7 @@ pub(crate) fn create_rpc_methods<Da: DaService + Clone>(
 ) -> Result<jsonrpsee::RpcModule<()>, anyhow::Error> {
     let batch_builder = create_batch_builder::<<Da as DaService>::Spec>(storage.clone());
 
-    let mut methods = demo_stf::runtime::get_rpc_methods::<DefaultContext, <Da as DaService>::Spec>(
+    let mut methods = stf::runtime::get_rpc_methods::<DefaultContext, <Da as DaService>::Spec>(
         storage.clone(),
     );
 

@@ -30,7 +30,7 @@ schemars = "0.8.22"
 serde = { version = "1", features = ["derive"] , optional=true}
 serde_json = {version="1" , optional=true}
 
-jsonrpsee = {version="0.25.1",features = ["http-client", "server"], optional = true }
+jsonrpsee = {version="0.20.2",features = ["http-client", "server"], optional = true }
 reddit = {path = "../reddit" }
 [features]
 default = ["native"]

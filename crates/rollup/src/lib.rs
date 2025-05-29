@@ -1,5 +1,5 @@
-use const_rollup_config::ROLLUP_NAMESPACE_RAW;
-use sov_celestia_adapter::types::Namespace;
+use rollup_config::ROLLUP_NAMESPACE_RAW;
+use celestia_adapter::types::Namespace;
 pub mod celestia_rollup;
 pub mod common;
 

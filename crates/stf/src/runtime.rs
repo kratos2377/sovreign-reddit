@@ -52,7 +52,7 @@ use sov_value_setter::{ValueSetterRpcImpl, ValueSetterRpcServer};
 #[cfg(feature = "native")]
 use reddit::query::{RedditRpcImpl, RedditRpcServer};
 
-#[cfg_attr(feature = "native", derive(CliWallet), expose_rpc)]
+#[cfg_attr(feature = "native", derive(CliWallet))]
 #[derive(Genesis, DispatchCall, MessageCodec, DefaultRuntime)]
 #[serialization(borsh::BorshDeserialize, borsh::BorshSerialize)]
 #[cfg_attr(

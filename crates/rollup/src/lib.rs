@@ -1,14 +1,8 @@
-pub fn add(left: u64, right: u64) -> u64 {
-    left + right
-}
+use const_rollup_config::ROLLUP_NAMESPACE_RAW;
+use sov_celestia_adapter::types::Namespace;
+pub mod celestia_rollup;
+pub mod common;
 
-#[cfg(test)]
-mod tests {
-    use super::*;
-
-    #[test]
-    fn it_works() {
-        let result = add(2, 2);
-        assert_eq!(result, 4);
-    }
-}
+/// The rollup stores its data in the namespace b"sov-test" on Celestia
+/// You can change this constant to point your rollup at a different namespace
+pub const ROLLUP_NAMESPACE: Namespace = Namespace::const_v0(ROLLUP_NAMESPACE_RAW);

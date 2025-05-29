@@ -3,4 +3,43 @@ name = "rollup"
 version = "0.1.0"
 edition = "2021"
 
+
 [dependencies]
+sov-rollup-interface = { git = "https://github.com/Sovereign-Labs/sovereign-sdk.git", branch = "stable", default-features = false }
+sov-rng-da-service = { git = "https://github.com/Sovereign-Labs/sovereign-sdk.git", branch = "stable"}
+sov-zk-cycle-utils = { git = "https://github.com/Sovereign-Labs/sovereign-sdk.git", branch = "stable", default-features = false }
+sov-zk-cycle-macros = { git = "https://github.com/Sovereign-Labs/sovereign-sdk.git", branch = "stable", default-features = false }
+sov-stf-runner = { git = "https://github.com/Sovereign-Labs/sovereign-sdk.git", branch = "stable", default-features = false }
+sov-modules-api = { git = "https://github.com/Sovereign-Labs/sovereign-sdk.git", branch = "stable", default-features = false }
+anyhow = "1.0.98"
+thiserror = "2.0.12"
+borsh = { version = "0.10.3", features = ["rc"], optional = true }
+
+tracing = "0.1.41"
+jmt = "0.11.0"
+hex = "0.4.3"
+
+clap = {version="4.5.38", optional=true}
+schemars = "0.8.22"
+serde = { version = "1", features = ["derive"] , optional=true}
+serde_json = {version="1" , optional=true}
+
+jsonrpsee = {version="0.25.1",features = ["http-client", "server"], optional = true }
+reddit = {path = "../reddit" }
+tokio = "1.45.1"
+
+stf = {path = "../stf"}
+
+
+[features]
+default = ["native"]
+borsh = ["dep:borsh"]
+native = [ "jsonrpsee" ,
+    "sov-stf-runner/native",
+    "sov-modules-api/native",
+    "clap",
+    "serde",
+        "jsonrpsee",
+    "serde_json",
+"borsh"]
+

@@ -19,20 +19,6 @@ fn main() {
     }
 }
 
-
-#[cfg(not(feature = "bench"))]
 fn get_guest_options() -> HashMap<&'static str, risc0_build::GuestOptions> {
     HashMap::new()
-}
-
-#[cfg(feature = "bench")]
-fn get_guest_options() -> HashMap<&'static str, risc0_build::GuestOptions> {
-    let mut guest_pkg_to_options = HashMap::new();
-    guest_pkg_to_options.insert(
-        "guest-celestia",
-        risc0_build::GuestOptions {
-            features: vec!["bench".to_string()],
-        },
-    );
-    guest_pkg_to_options
 }

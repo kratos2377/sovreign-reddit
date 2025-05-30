@@ -4,19 +4,20 @@ version = "0.1.0"
 edition = "2021"
 
 [dependencies]
-anyhow = "1.0.62"
-borsh = { version = "0.10.3", features = ["rc"], optional = true }
-clap = "4.5.38"
-jsonrpsee = {version="0.20.2",features = ["http-client", "server"], optional = true }
-schemars = "0.8.22"
-serde = { version = "1", features = ["derive"] , optional=true}
-serde_json = {version="1" , optional=true}
 uuid = {version ="1.17.0" , features=["v4"]}
-sov-modules-api = { git = "https://github.com/Sovereign-Labs/sovereign-sdk.git", branch = "stable",  default-features = false  }
-sov-modules-macros = { git = "https://github.com/Sovereign-Labs/sovereign-sdk.git", branch = "stable", default-features = false }
-sov-state = { git = "https://github.com/Sovereign-Labs/sovereign-sdk.git", branch = "stable", default-features = false }
+
+anyhow = {workspace = true}
+borsh = {workspace = true , optional=true}
+clap = {workspace = true}
+jsonrpsee = {workspace = true, optional=true}
+serde = {workspace = true , optional=true}
+serde_json = {workspace = true , optional=true}
+sov-modules-api = {workspace = true}
+sov-modules-macros = {workspace = true , features =["native"]}
+sov-state = {workspace = true}
 reqwest = "0.12.15"
-tokio = { version = "1", features = ["full"] , optional = true }
+tokio = {workspace = true , optional=true}
+schemars = "0.8.19"
 
 [features]
 default = ["native"]

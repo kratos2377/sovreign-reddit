@@ -1,6 +1,6 @@
 use std::collections::HashMap;
 use anyhow::{anyhow, bail};
-use sov_modules_api::{Context, StateMap, WorkingSet};
+use sov_modules_api::{Context, StateMap, StateMapAccessor, WorkingSet};
 
 use crate::{address::{SubAddress, UserAddress}, utils::get_sub_address};
 

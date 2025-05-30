@@ -7,11 +7,15 @@ use crate::Reddit;
 
 impl<C: Context> TxHooks for Reddit<C> {
     type Context = C;
+     type PreArg = C::PublicKey;
+    type PreResult = C::Address;
 
+    
     fn pre_dispatch_tx_hook(
         &self,
         tx: &Transaction<C>,
         working_set: &mut WorkingSet<C>,
+           sequencer: &C::PublicKey,
     ) -> anyhow::Result<<Self::Context as Spec>::Address> {
         let pub_key = tx.pub_key();
 
@@ -21,9 +25,12 @@ impl<C: Context> TxHooks for Reddit<C> {
     fn post_dispatch_tx_hook(
         &self,
         tx: &Transaction<Self::Context>,
+        _ctx: &C,
         working_set: &mut WorkingSet<C>,
     ) -> anyhow::Result<()> {
 
         Ok(())
     }
+    
+
 }

@@ -1,5 +1,5 @@
 use anyhow::{anyhow, bail};
-use sov_modules_api::{Context, StateMap, WorkingSet};
+use sov_modules_api::{Context, StateMap, StateMapAccessor, WorkingSet};
 
 use crate::{address::{PostAddress, UserAddress}, utils::get_user_address};
 

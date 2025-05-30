@@ -51,6 +51,7 @@ impl<C:Context> Module for Reddit<C> {
     type CallMessage = CallMessage<C>;
 
 
+        type Event = ();
       fn genesis(
         &self,
         _config: &Self::Config,
@@ -97,5 +98,6 @@ impl<C:Context> Module for Reddit<C> {
     ) -> anyhow::Result<()> {
         working_set.charge_gas(gas)
     }
+    
 
 }

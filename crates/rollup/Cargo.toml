@@ -1,58 +1,47 @@
 [package]
 name = "rollup"
-version = "0.1.0"
-edition = "2021"
+version = { workspace = true }
+edition = { workspace = true }
+
 
 
 [dependencies]
-sov-rollup-interface = { git = "https://github.com/Sovereign-Labs/sovereign-sdk.git", branch = "stable", default-features = false }
-sov-rng-da-service = { git = "https://github.com/Sovereign-Labs/sovereign-sdk.git", branch = "stable"}
-sov-zk-cycle-utils = { git = "https://github.com/Sovereign-Labs/sovereign-sdk.git", branch = "stable", default-features = false }
-sov-zk-cycle-macros = { git = "https://github.com/Sovereign-Labs/sovereign-sdk.git", branch = "stable", default-features = false }
-sov-stf-runner = { git = "https://github.com/Sovereign-Labs/sovereign-sdk.git", branch = "stable", default-features = false }
-sov-modules-api = { git = "https://github.com/Sovereign-Labs/sovereign-sdk.git", branch = "stable", default-features = false }
-sov-state = { git = "https://github.com/Sovereign-Labs/sovereign-sdk.git", branch = "stable", default-features = false }
-sov-db = { git = "https://github.com/Sovereign-Labs/sovereign-sdk.git", branch = "stable", default-features = false }
-sov-modules-stf-template = { git = "https://github.com/Sovereign-Labs/sovereign-sdk.git", branch = "stable", default-features = false }
+sov-modules-api = { workspace = true, features = ["native"] }
+sov-state = { workspace = true }
+sov-prover-storage-manager = { workspace = true }
+sov-accounts = { workspace = true, features = ["native"] }
+sov-bank = { workspace = true, features = ["native"] }
+sov-ledger-rpc = { workspace = true, features = ["server"] }
+sov-sequencer-registry = { workspace = true, features = ["native"] }
+sov-modules-rollup-blueprint = { workspace = true }
+sov-modules-stf-blueprint = { workspace = true, features = ["native"] }
+sov-stf-runner = { workspace = true, features = ["native"] }
+sov-cli = { workspace = true, optional = true }
 
-sov-modules-rollup-template = { git = "https://github.com/Sovereign-Labs/sovereign-sdk.git", branch = "stable", default-features = false }
-
-sov-ledger-rpc= { git = "https://github.com/Sovereign-Labs/sovereign-sdk.git", branch = "stable", default-features = false }
-
-sov-sequencer= { git = "https://github.com/Sovereign-Labs/sovereign-sdk.git", branch = "stable", default-features = false }
-anyhow = "1.0.98"
-thiserror = "2.0.12"
-borsh = { version = "0.10.3", features = ["rc"], optional = true }
-
-tracing = "0.1.41"
-jmt = "0.11.0"
-hex = "0.4.3"
-
-clap = {version="4.5.38", optional=true}
-schemars = "0.8.22"
-serde = { version = "1", features = ["derive"] , optional=true}
-serde_json = {version="1" , optional=true}
-
-jsonrpsee = {version="0.20.2",features = ["http-client", "server"], optional = true }
-reddit = {path = "../reddit" }
-tokio = {version = "1", features = ["full"] }
-
-stf = {path = "../stf"}
-risc0-adapter = {path = "../risc0-adapter"}
-celestia-adapter = {path = "../celestia-adapter"}
+sov-db = { workspace = true }
+sov-sequencer = { workspace = true }
+sov-rollup-interface = { workspace = true }
+sov-celestia-adapter = { workspace = true}
 rollup-config = {path = "../rollup-config"}
-async-trait = "0.1.88"
-risc0-prover = {path = "./risc0-prover"}
+anyhow = { workspace = true }
+async-trait = { workspace = true }
+borsh = { workspace = true }
+clap = { workspace = true }
+serde = { workspace = true }
+tracing = { workspace = true }
+serde_json = { workspace = true }
+jsonrpsee = { workspace = true }
+tokio = { workspace = true }
 
-[features]
-default = ["native"]
-borsh = ["dep:borsh"]
-native = [ "jsonrpsee" ,
-    "sov-stf-runner/native",
-    "sov-modules-api/native",
-    "clap",
-    "serde",
-        "jsonrpsee",
-    "serde_json",
-"borsh"]
+stf = { path = "../stf", features = ["native"] }
+risc0-starter = { path = "../provers/risc0" }
 
+sov-risc0-adapter = { workspace = true, features = ["native"] }
+
+[[bin]]
+name = "node"
+path = "src/bin/node.rs"
+
+[[bin]]
+name = "starter-cli-wallet"
+path = "src/bin/starter_cli_wallet.rs"

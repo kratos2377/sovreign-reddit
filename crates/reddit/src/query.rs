@@ -1,5 +1,5 @@
 use crate::{address::{PostAddress, SubAddress, UserAddress}, utils::{get_post_address, get_sub_address, get_user_address}, Reddit};
-use sov_modules_api::{Context, WorkingSet};
+use sov_modules_api::{Context, StateMapAccessor, WorkingSet};
 use sov_modules_macros::rpc_gen;
 use jsonrpsee::core::RpcResult;
 

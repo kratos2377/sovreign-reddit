@@ -80,6 +80,7 @@ pub struct CompactHeader {
     pub proposer_address: Vec<u8>,
 }
 
+#[allow(dead_code)]
 trait EncodeTm34 {
     fn encode_to_tm34_protobuf(&self) -> Result<Vec<u8>, BoxError>;
 }

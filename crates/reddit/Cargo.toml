@@ -16,7 +16,7 @@ sov-modules-api = { git = "https://github.com/Sovereign-Labs/sovereign-sdk.git",
 sov-modules-macros = { git = "https://github.com/Sovereign-Labs/sovereign-sdk.git", branch = "stable", default-features = false }
 sov-state = { git = "https://github.com/Sovereign-Labs/sovereign-sdk.git", branch = "stable", default-features = false }
 reqwest = "0.12.15"
-tokio = { version = "1.42.0", features = ["full"], optional = true }
+tokio = { version = "1", features = ["full"] , optional = true }
 
 [features]
 default = ["native"]

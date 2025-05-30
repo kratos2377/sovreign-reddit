@@ -2,7 +2,7 @@
 use std::sync::Mutex;
 
 use risc0_zkvm::serde::to_vec;
-use risc0_zkvm::{Executor, ExecutorEnvBuilder, InnerReceipt, Receipt, Session};
+use risc0_zkvm::{Executor, ExecutorEnvBuilder, ExecutorImpl, InnerReceipt, Receipt, Session};
 use serde::de::DeserializeOwned;
 use serde::Serialize;
 use sov_rollup_interface::zk::{Zkvm, ZkvmHost};
@@ -48,11 +48,11 @@ impl<'a> Risc0Host<'a> {
     /// This creates the "Session" trace without invoking the heavy cryptographic machinery.
     pub fn run_without_proving(&mut self) -> anyhow::Result<Session> {
         let env = add_benchmarking_callbacks(ExecutorEnvBuilder::default())
-            .add_input(&self.env.lock().unwrap())
+            .write_slice(&self.env.lock().unwrap())
             .build()
             .unwrap();
-        let mut executor = Executor::from_elf(env, self.elf)?;
-        executor.run()
+        let mut executor = ExecutorImpl::from_elf(env, self.elf)?;
+          Ok(executor.run()?)
     }
     /// Run a computation in the zkvm and generate a receipt.
     pub fn run(&mut self) -> anyhow::Result<Receipt> {
